@@ -1,5 +1,5 @@
-const getData = async (endpointUrl, offset = "") => {
-  const airTableToken = "Bearer keyc4hHWKfMJQyutK";
+const getData = async (endpointUrl, offset = '') => {
+  const airTableToken = 'Bearer keyc4hHWKfMJQyutK';
   const res = await fetch(`${endpointUrl}&offset=${offset}`, {
     headers: { Authorization: airTableToken },
   });
