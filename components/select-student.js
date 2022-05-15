@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useTheContext } from '../context-provider';
+import { useTheContext } from '../hocs/context-provider';
 
 export const SelectStudent = () => {
   const {
@@ -33,10 +33,10 @@ export const SelectStudent = () => {
   }, [selectedStudent, setStudentProgress]);
 
   if (allStudents.length === 0)
-    return <div className="load-students-div">Loading Students</div>;
+    return <div className="load-students">Loading Students</div>;
 
   return (
-    <div className="load-students-div">
+    <div className="load-students">
       <label>Select a Students Name then Click Load Data: </label>
       <select
         value={allStudents?.findIndex(
