@@ -1,14 +1,19 @@
-import { getAllRecs } from './get-all-records';
-import { yyyymmdd, newOffsetDt } from './my-date-functions';
+// const { AIRTABLE_ENDPOINT, STUDENT_RECORDS_AIR_TABLE_ID } = process.env;
 
-export async function getAllStudents() {
-  // Load Student Data from Airtable
-  const airTableEndpoint = 'https://api.airtable.com/v0/appg2CeX4DA9Y7hDi/';
-  const studentRecordsAirTableId = 'tblqcf7IvD0uXCms9?';
+import { getAllRecs } from '../../helpers/get-all-records';
+import { yyyymmdd, newOffsetDt } from '../../helpers/my-date-functions';
+
+export default async function handler(req, res) {
   const filter = '?view=In_progress';
   const fields =
     '&fields=RecordID&fields=Student%20Name&fields=Course%20Start%20Date';
-  const url = airTableEndpoint + studentRecordsAirTableId + filter + fields;
+
+  // TODO put this in .env.local
+  const AIRTABLE_ENDPOINT = 'https://api.airtable.com/v0/appg2CeX4DA9Y7hDi/';
+  const STUDENT_RECORDS_AIR_TABLE_ID = 'tblqcf7IvD0uXCms9?';
+
+  const url =
+    AIRTABLE_ENDPOINT + STUDENT_RECORDS_AIR_TABLE_ID + filter + fields;
   const allRecs = await getAllRecs(url, 5);
 
   // Transform Data
@@ -32,5 +37,6 @@ export async function getAllStudents() {
     ...sortedStudents,
   ];
 
-  return withSelectStudent;
+  // res.status(201).json(allRecs);
+  res.status(201).json(withSelectStudent);
 }

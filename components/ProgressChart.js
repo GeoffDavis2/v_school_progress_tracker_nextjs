@@ -1,7 +1,9 @@
+import { useTheContext } from '../hocs/context-provider';
 import 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 
-export const ProgressChart = ({ studentProgress }) => {
+export const ProgressChart = () => {
+  const { studentProgress } = useTheContext();
   const goalLine = (len, tot) => {
     if (len < 1) return [];
     const arr = new Array(len).fill(null);
@@ -42,7 +44,7 @@ export const ProgressChart = ({ studentProgress }) => {
       position: 'right',
     },
     maintainAspectRatio: true,
-    responsive: false,
+    // responsive: false,
   };
 
   return (
