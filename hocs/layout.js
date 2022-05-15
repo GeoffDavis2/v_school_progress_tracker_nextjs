@@ -5,7 +5,7 @@ import { SelectStudent } from '../components/select-student';
 
 const Layout = ({ children }) => {
   const menuItems = [
-    { title: 'Progress Charts', href: '/progress-charts' },
+    { title: 'Progress-Charts', href: '/progress-charts' },
     { title: 'Progress Data', href: '/progress-data' },
     { title: 'Settings', href: '/settings' },
   ];
