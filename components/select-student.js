@@ -23,7 +23,7 @@ export const SelectStudent = () => {
 
     (async () => {
       const res = await (
-        await fetch('http://localhost:3000/api/get-student-progress', {
+        await fetch('/api/get-student-progress', {
           method: 'POST',
           body: JSON.stringify(selectedStudent),
         })
