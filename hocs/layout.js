@@ -1,9 +1,11 @@
 import React from 'react';
 import Head from 'next/head';
+import { useSession } from 'next-auth/react';
 import { Navbar } from '../components/navbar';
 import { SelectStudent } from '../components/select-student';
 
 const Layout = ({ children }) => {
+  const { status } = useSession();
   const menuItems = [
     { title: 'Progress Charts', href: '/progress-charts' },
     { title: 'Progress Data', href: '/progress-data' },
