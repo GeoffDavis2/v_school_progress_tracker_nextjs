@@ -1,4 +1,4 @@
-// const { AIRTABLE_ENDPOINT, STUDENT_RECORDS_AIR_TABLE_ID } = process.env;
+const { AIRTABLE_ENDPOINT, STUDENT_TRACKING_AIR_TABLE_ID } = process.env;
 
 import { getAllRecs } from '../../helpers/get-all-records';
 import { yyyymmdd, newOffsetDt } from '../../helpers/my-date-functions';
@@ -9,9 +9,6 @@ export default async function handler(req, res) {
   const filter = `&filterByFormula=AND%28%7BStudentRecordID%7D%3D%27${theStudent.studentId}%27%2C%7BAttendance%7D%3D%27Attended%27%29`;
   const fields =
     '&fields=Date%20Reported&fields=Level%20at%20submission%20&fields=Current%20Story%20Point';
-  // TODO put this in .env.local
-  const AIRTABLE_ENDPOINT = 'https://api.airtable.com/v0/appg2CeX4DA9Y7hDi/';
-  const STUDENT_TRACKING_AIR_TABLE_ID = 'tblQXrG1bxTHju526?';
   const url =
     AIRTABLE_ENDPOINT + STUDENT_TRACKING_AIR_TABLE_ID + filter + fields;
   const allRecs = await getAllRecs(url, 5);
@@ -30,12 +27,12 @@ export default async function handler(req, res) {
       a.dt > b.dt
         ? -1
         : a.dt < b.dt
-        ? 1
-        : a.pts > b.pts
-        ? -1
-        : a.pts < b.pts
-        ? 1
-        : 0,
+          ? 1
+          : a.pts > b.pts
+            ? -1
+            : a.pts < b.pts
+              ? 1
+              : 0,
     );
 
   // Generate array (allDates) with all dates between (theStudent.startDt and theStudent.endDt)
