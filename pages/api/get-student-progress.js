@@ -27,12 +27,12 @@ export default async function handler(req, res) {
       a.dt > b.dt
         ? -1
         : a.dt < b.dt
-          ? 1
-          : a.pts > b.pts
-            ? -1
-            : a.pts < b.pts
-              ? 1
-              : 0,
+        ? 1
+        : a.pts > b.pts
+        ? -1
+        : a.pts < b.pts
+        ? 1
+        : 0,
     );
 
   // Generate array (allDates) with all dates between (theStudent.startDt and theStudent.endDt)
