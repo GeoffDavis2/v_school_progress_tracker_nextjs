@@ -40,7 +40,10 @@ export const Navbar = () => {
         {menuItems.map((item) => (
           <NavItem key={item.title} item={item} />
         ))}
-        <button style={{ marginLeft: '25px' }} onClick={() => signOut('auth0')}>
+        <button
+          style={{ marginLeft: '25px' }}
+          onClick={() => signOut({ callbackUrl: `/` })}
+        >
           Sign Out
         </button>
       </div>
