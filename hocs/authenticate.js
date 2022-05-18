@@ -9,12 +9,13 @@ const Authenticate = ({ children }) => {
   if (status === 'unauthenticated')
     return (
       <button
-        onClick={
-          () => signIn('auth0')
-          // signIn('auth0', {
-          // callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/progress-charts`,
-          // callbackUrl: `https://v-school-progress-tracker-nextjs.vercel.app/progress-charts`,
-          // })
+        onClick={() =>
+          //signIn('auth0')
+          signIn('auth0', {
+            // callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/progress-charts`,
+            // callbackUrl: 'http://localhost:3000/progress-charts',
+            callbackUrl: '/progress-charts',
+          })
         }
       >
         <h1>Sign In with Auth0</h1>
