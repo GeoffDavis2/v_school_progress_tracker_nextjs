@@ -12,7 +12,7 @@ const Authenticate = ({ children }) => {
         onClick={() =>
           signIn('auth0', {
             // callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/progress-charts`,
-            callbackUrl: `/progress-charts`,
+            callbackUrl: `https://v-school-progress-tracker-nextjs.vercel.app/progress-charts`,
           })
         }
       >
