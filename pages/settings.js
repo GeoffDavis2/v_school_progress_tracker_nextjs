@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>hello from settings</div>;
+  return <h1>Settings Page comming soon...</h1>;
 }

@@ -1,13 +1,16 @@
-import { useSession } from 'next-auth/react';
-// import React from 'react';
+import { useSession, signIn } from 'next-auth/react';
 
 const Authenticate = ({ children }) => {
   const { status } = useSession();
-  console.log(status);
-  if (status === 'loading') return <div>Loading</div>;
-  if (status === 'unauthenticated') return <div>Log in</div>
-  if (status === 'authenticated') return <>{children}</>
-  return <>Unknown Error</>
+  if (status === 'unauthenticated')
+    return (
+      <button onClick={() => signIn('github')}>
+        <h1>Sign In with GitHub</h1>
+      </button>
+    );
+  if (status === 'loading') return <h1>Logging In</h1>;
+  if (status === 'authenticated') return <>{children}</>;
+  return <>Unknown Error</>;
 };
 
 export default Authenticate;

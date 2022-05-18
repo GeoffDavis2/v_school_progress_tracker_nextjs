@@ -1,11 +1,25 @@
-import React from 'react';
 import Link from 'next/link';
-import { Logo } from './Logo';
-import { signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { signOut } from 'next-auth/react';
+
+const textStyle = {
+  padding: '5px 25px',
+  borderBottom: '.5rem solid InactiveBorder',
+  fontSize: 'larger',
+  fontWeight: 'bold',
+  textTransform: 'uppercase',
+};
 
 const NavItem = ({ item }) => {
+  const router = useRouter();
+  const activeStyle = '.5rem solid blue';
   return (
-    <div className="navitem">
+    <div
+      style={{
+        ...textStyle,
+        borderBottom: router.pathname === item.href ? activeStyle : '',
+      }}
+    >
       <Link href={item.href} passHref>
         <div>{item.title}</div>
       </Link>
@@ -13,15 +27,26 @@ const NavItem = ({ item }) => {
   );
 };
 
-export const Navbar = ({ items }) => {
+export const Navbar = () => {
+  const menuItems = [
+    { title: 'Progress Charts', href: '/progress-charts' },
+    { title: 'Progress Data', href: '/progress-data' },
+    { title: 'Settings', href: '/settings' },
+  ];
   return (
-    <div className="navbar">
-      <Logo />
-      {items.map((item) => (
-        <NavItem key={item.title} item={item} />
-      ))}
-      <button onClick={() => signIn('github')}>Sign In</button>
-      <button onClick={() => signOut('github')}>Sign Out</button>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={textStyle}>V School Progress Tracker</div>
+      <div style={{ display: 'flex' }}>
+        {menuItems.map((item) => (
+          <NavItem key={item.title} item={item} />
+        ))}
+        <button
+          style={{ marginLeft: '25px' }}
+          onClick={() => signOut('github')}
+        >
+          Sign Out
+        </button>
+      </div>
     </div>
   );
 };

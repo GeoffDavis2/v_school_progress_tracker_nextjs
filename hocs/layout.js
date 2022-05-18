@@ -1,17 +1,8 @@
-import React from 'react';
 import Head from 'next/head';
-import { useSession } from 'next-auth/react';
 import { Navbar } from '../components/navbar';
 import { SelectStudent } from '../components/select-student';
 
 const Layout = ({ children }) => {
-  const { status } = useSession();
-  const menuItems = [
-    { title: 'Progress Charts', href: '/progress-charts' },
-    { title: 'Progress Data', href: '/progress-data' },
-    { title: 'Settings', href: '/settings' },
-  ];
-
   return (
     <>
       <Head>
@@ -19,13 +10,15 @@ const Layout = ({ children }) => {
       </Head>
 
       <header>
-        <Navbar items={menuItems} />
+        <Navbar />
       </header>
 
       <main>
         <SelectStudent />
         {children}
-        <footer>&nbsp;</footer>
+        <footer>
+          <h1>Footer Info Here...</h1>
+        </footer>
       </main>
     </>
   );

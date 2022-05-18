@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTheContext } from '../hocs/context-provider';
 
 export const SelectStudent = () => {
@@ -9,14 +9,16 @@ export const SelectStudent = () => {
     setStudentProgress,
   } = useTheContext();
 
-  // useEffect(() => {
-  //   const prevStudentId = localStorage.getItem('selectedStudentId') ?? null;
-  //   if (prevStudentId && allStudents.length > 0)
-  //     setSelectedStudent(
-  //       allStudents.find((obj) => obj.studentId === prevStudentId),
-  //     );
-  // }, [allStudents, setSelectedStudent]);
+  // Load selected student if possible
+  useEffect(() => {
+    const prevStudentId = localStorage.getItem('selectedStudentId') ?? null;
+    if (prevStudentId && allStudents.length > 0)
+      setSelectedStudent(
+        allStudents.find((obj) => obj.studentId === prevStudentId),
+      );
+  }, [allStudents, setSelectedStudent]);
 
+  // If new selected student, load in localstorage and load progress data for the student
   useEffect(() => {
     if (selectedStudent.studentId)
       localStorage.setItem('selectedStudentId', selectedStudent.studentId);
@@ -37,7 +39,7 @@ export const SelectStudent = () => {
 
   return (
     <div className="load-students">
-      <label>Select a Students Name then Click Load Data: </label>
+      <label>Select a Student: </label>
       <select
         value={allStudents?.findIndex(
           (obj) => obj.studentId === selectedStudent.studentId,
