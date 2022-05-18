@@ -5,10 +5,13 @@ const Authenticate = ({ children }) => {
   if (status === 'unauthenticated')
     return (
       <>
-        <button onClick={() => signIn('github')}>
-          <h1>Sign In with GitHub</h1>
-        </button>
-        <button onClick={() => signIn('github')}>
+        <button
+          onClick={() =>
+            signIn('github', {
+              callbackUrl: `${window.location.origin}`,
+            })
+          }
+        >
           <h1>Sign In with GitHub</h1>
         </button>
       </>
