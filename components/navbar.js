@@ -43,7 +43,6 @@ export const Navbar = () => {
         <button
           style={{ marginLeft: '25px' }}
           onClick={() => signOut({ callbackUrl: '/' })}
-          // onClick={() => signOut()}
         >
           Sign Out
         </button>

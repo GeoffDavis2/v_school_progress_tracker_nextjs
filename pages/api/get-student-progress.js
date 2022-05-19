@@ -1,7 +1,7 @@
 const { AIRTABLE_ENDPOINT, STUDENT_TRACKING_AIR_TABLE_ID } = process.env;
 
 import { getAllRecs } from '../../helpers/get-all-records';
-import { yyyymmdd, newOffsetDt } from '../../helpers/my-date-functions';
+import { DateTime } from 'luxon';
 
 export default async function handler(req, res) {
   const theStudent = JSON.parse(req.body);
@@ -35,15 +35,14 @@ export default async function handler(req, res) {
         : 0,
     );
 
-  // Generate array (allDates) with all dates between (theStudent.startDt and theStudent.endDt)
   const genAllDates = (st, end, arr = []) =>
     st <= end
-      ? genAllDates(newOffsetDt(st, 1), end, [...arr, { dt: yyyymmdd(st) }])
+      ? genAllDates(DateTime.fromISO(st).plus({ days: 1 }).toISODate(), end, [
+          ...arr,
+          { dt: st },
+        ])
       : arr;
-  const allDates = genAllDates(
-    new Date(theStudent.startDt),
-    new Date(theStudent.endDt),
-  );
+  const allDates = genAllDates(theStudent.startDt, theStudent.endDt);
 
   // Merge (revSortedProgress) array with Student Progress Data into (allDates)
   const mergedArr = allDates.map((obj, i, arr) => ({
@@ -55,6 +54,5 @@ export default async function handler(req, res) {
   const addStudenName = JSON.parse(JSON.stringify(mergedArr));
   if (addStudenName[0]) addStudenName[0].studentName = theStudent.studentName;
 
-  // res.status(201).json(addStudenName);
   res.status(201).json(addStudenName);
 }

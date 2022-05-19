@@ -1,7 +1,7 @@
 const { AIRTABLE_ENDPOINT, STUDENT_RECORDS_AIR_TABLE_ID } = process.env;
 
 import { getAllRecs } from '../../helpers/get-all-records';
-import { yyyymmdd, newOffsetDt } from '../../helpers/my-date-functions';
+import { DateTime } from 'luxon';
 
 export default async function handler(req, res) {
   const filter = '?view=In_progress';
@@ -17,7 +17,10 @@ export default async function handler(req, res) {
     studentId: obj.RecordID,
     studentName: obj['Student Name'],
     startDt: obj['Course Start Date'],
-    endDt: yyyymmdd(newOffsetDt(obj['Course Start Date'], 250)), // TODO add End Date field to Airtable "Student Record" table instead of calculating it here
+    endDt: DateTime.fromISO(obj['Course Start Date'])
+      .toUTC()
+      .plus({ days: 250 })
+      .toISODate(),
   }));
 
   // Sort Data
@@ -33,6 +36,5 @@ export default async function handler(req, res) {
     ...sortedStudents,
   ];
 
-  // res.status(201).json(allRecs);
   res.status(201).json(withSelectStudent);
 }

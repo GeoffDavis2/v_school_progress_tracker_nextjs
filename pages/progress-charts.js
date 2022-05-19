@@ -49,12 +49,10 @@ export default function ProgressCharts() {
   return (
     <div>
       {studentProgress.length < 1 ? (
-        <div className="no-data">No Data</div>
+        <h1>No Data</h1>
       ) : (
-        <div className="charts">
-          <p className="page-title">
-            Total Progress for {studentProgress[0].studentName}
-          </p>
+        <div>
+          <h2>Total Progress for {studentProgress[0].studentName}</h2>
           <Line datasetIdKey="id" data={chartData} options={chartOptions} />
         </div>
       )}

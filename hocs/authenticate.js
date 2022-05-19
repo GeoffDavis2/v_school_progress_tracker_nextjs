@@ -2,21 +2,11 @@ import { useSession, signIn } from 'next-auth/react';
 
 const Authenticate = ({ children }) => {
   const { status } = useSession();
-  // console.log(process.env.AUTH0_CLIENT_ID);
-  // const domain = process.env.NEXT_PUBLIC_PORT;
-  // console.log('domain',domain);
 
   if (status === 'unauthenticated')
     return (
       <button
-        onClick={() =>
-          //signIn('auth0')
-          signIn('auth0', {
-            // callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/progress-charts`,
-            // callbackUrl: 'http://localhost:3000/progress-charts',
-            callbackUrl: '/progress-charts',
-          })
-        }
+        onClick={() => signIn('auth0', { callbackUrl: '/progress-charts' })}
       >
         <h1>Sign In with Auth0</h1>
       </button>

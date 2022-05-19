@@ -4,34 +4,3 @@ body {
   margin: 0;
   scrollbar-gutter: stable;
 }
-
-.navbar {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.logo-img {
-  display: inline;
-  max-width: 10rem;
-  height: auto;
-  padding: 0;
-}
-
-.logo-text {
-  font-size: x-large;
-  font-weight: bold;
-  padding: 5px 25px;
-  margin: 0;
-}
-
-.navitem {
-  padding: 5px 25px;
-  border-bottom: .5rem solid blue;
-  font-size: larger;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.load-students {
-  margin-top: 50px;
-}

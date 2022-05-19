@@ -35,11 +35,13 @@ export const SelectStudent = () => {
   }, [selectedStudent, setStudentProgress]);
 
   if (allStudents.length === 0)
-    return <div className="load-students">Loading Students</div>;
+    return <h1 style={{ marginTop: '50px' }}>Loading Students</h1>;
 
   return (
-    <div className="load-students">
-      <label>Select a Student: </label>
+    <div style={{ marginTop: '50px' }}>
+      <label>
+        <h2 style={{ display: 'inline' }}>Select a Student: </h2>
+      </label>
       <select
         value={allStudents?.findIndex(
           (obj) => obj.studentId === selectedStudent.studentId,
