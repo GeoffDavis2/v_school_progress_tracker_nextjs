@@ -13,7 +13,7 @@ const Authenticate = ({ children }) => {
     );
   if (status === 'loading') return <h1>Logging In</h1>;
   if (status === 'authenticated') return <>{children}</>;
-  return <>Unknown Error</>;
+  return <h1>Unknown Error</h1>;
 };
 
 export default Authenticate;

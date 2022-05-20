@@ -1,11 +1,18 @@
-const { AIRTABLE_ENDPOINT, STUDENT_TRACKING_AIR_TABLE_ID } = process.env;
-
+import { getSession } from 'next-auth/react';
 import { getAllRecs } from '../../helpers/get-all-records';
 import { DateTime } from 'luxon';
 
 export default async function handler(req, res) {
-  const theStudent = JSON.parse(req.body);
+  const session = await getSession({ req });
+  if (!session) return res.status(401).json({ errMsg: 'Not Authenticated' });
 
+  if (!req || !req.body)
+    return res
+      .status(400)
+      .json({ errMsg: 'Insufficient request (req) in api call.' });
+
+  const { AIRTABLE_ENDPOINT, STUDENT_TRACKING_AIR_TABLE_ID } = process.env;
+  const theStudent = JSON.parse(req.body);
   const filter = `&filterByFormula=AND%28%7BStudentRecordID%7D%3D%27${theStudent.studentId}%27%2C%7BAttendance%7D%3D%27Attended%27%29`;
   const fields =
     '&fields=Date%20Reported&fields=Level%20at%20submission%20&fields=Current%20Story%20Point';
@@ -54,5 +61,5 @@ export default async function handler(req, res) {
   const addStudenName = JSON.parse(JSON.stringify(mergedArr));
   if (addStudenName[0]) addStudenName[0].studentName = theStudent.studentName;
 
-  res.status(201).json(addStudenName);
+  return res.status(201).json(addStudenName);
 }
