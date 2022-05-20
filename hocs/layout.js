@@ -14,8 +14,8 @@ const Layout = ({ children }) => {
       </header>
 
       <main>
-        <SelectStudent />
-        {children}
+        {/* <SelectStudent />
+        {children} */}
         <footer>
           <h1>Footer Info Here...</h1>
         </footer>
