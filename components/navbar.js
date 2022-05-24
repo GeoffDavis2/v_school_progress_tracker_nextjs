@@ -17,7 +17,7 @@ const NavItem = ({ item }) => {
     <div
       style={{
         ...textStyle,
-        borderBottom: router.pathname === item.href ? activeStyle : '',
+        borderBottom: router.pathname === item.href ? activeStyle : null,
       }}
     >
       <Link href={item.href} passHref>

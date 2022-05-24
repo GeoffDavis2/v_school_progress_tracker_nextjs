@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { useTheContext } from '../hocs/context-provider';
 import 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
@@ -46,6 +47,7 @@ export default function ProgressCharts() {
     maintainAspectRatio: true,
     // responsive: false,
   };
+
   return (
     <div>
       {studentProgress.length < 1 ? (
@@ -58,4 +60,21 @@ export default function ProgressCharts() {
       )}
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
 }
