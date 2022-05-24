@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   const { AIRTABLE_ENDPOINT, STUDENT_RECORDS_AIR_TABLE_ID } = process.env;
   const filter = '?view=In_progress';
   const fields =
-    '&fields=RecordID&fields=Student%20Name&fields=Course%20Start%20Date';
+    '&fields=RecordID&fields=Student%20Name&fields=Course%20Start%20Date&fields=Planned%20End%20Date';
 
   const url =
     AIRTABLE_ENDPOINT + STUDENT_RECORDS_AIR_TABLE_ID + filter + fields;
@@ -20,11 +20,33 @@ export default async function handler(req, res) {
     studentId: obj.RecordID,
     studentName: obj['Student Name'],
     startDt: obj['Course Start Date'],
-    endDt: DateTime.fromISO(obj['Course Start Date'])
-      .toUTC()
-      .plus({ days: 250 })
-      .toISODate(),
+    endDt: obj['Planned End Date']
+      ? obj['Planned End Date']
+      : DateTime.fromISO(obj['Course Start Date'])
+          .toUTC()
+          .plus({ days: 250 })
+          .toISODate(),
   }));
+
+  allRecs
+    .filter((obj) =>
+      ['rec3rFROxMgDJIT2f', 'rec4GboMrITNyWDFf'].includes(obj.RecordID),
+    )
+    .forEach((obj) => {
+      if (obj['Planned End Date'])
+        console.log(
+          `End Dt for ${obj['Student Name']} is ${obj['Planned End Date']}`,
+        );
+      console.log(obj);
+    });
+
+  reMappedFields
+    .filter((obj) =>
+      ['rec3rFROxMgDJIT2f', 'rec4GboMrITNyWDFf'].includes(obj.studentId),
+    )
+    .forEach((obj) => {
+      console.log(obj);
+    });
 
   // Sort Data
   const sortedStudents = reMappedFields
