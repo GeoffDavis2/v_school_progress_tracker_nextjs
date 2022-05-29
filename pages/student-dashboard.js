@@ -1,5 +1,5 @@
-import { useTheContext } from '../../hocs/context-provider';
-import { StudentInfo } from './Student-Info';
+import { useTheContext } from '../hocs/context-provider';
+import { StudentInfo } from '../components/student-dashboard/Student-Info';
 // import { ProgressPoints } from './Progress-Points';
 // import { EndDate } from './End-Date';
 // import { DailyPace } from './Daily-Pace';
