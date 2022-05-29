@@ -1,12 +1,12 @@
 import { useTheContext } from '../hocs/context-provider';
 import { StudentInfo } from '../components/student-dashboard/Student-Info';
-// import { ProgressPoints } from './Progress-Points';
-// import { EndDate } from './End-Date';
-// import { DailyPace } from './Daily-Pace';
-// import { DaysInLevel } from './Days-In-Level';
-// import { ProgressGraph } from './Progress-Graph';
-// import { CareerPrep } from '../../components/temp/Career-Prep';
-// import { ProgressData } from './Progress-Data';
+import { ProgressPoints } from '../components/student-dashboard/Progress-Points';
+import { EndDate } from '../components/student-dashboard/End-Date';
+import { DailyPace } from '../components/student-dashboard/Daily-Pace';
+import { DaysInLevel } from '../components/student-dashboard/Days-In-Level';
+import { ProgressGraph } from '../components/student-dashboard/Progress-Graph';
+import { CareerPrep } from '../components/student-dashboard/Career-Prep';
+import { ProgressData } from '../components/student-dashboard/Progress-Data';
 
 export default function StudentDashboard() {
   const { studentProgress } = useTheContext();
@@ -16,13 +16,13 @@ export default function StudentDashboard() {
   return (
     <div className="student_dashboard_grid_container">
       <StudentInfo />
-      {/* <ProgressGraph /> */}
-      {/* <ProgressPoints /> */}
-      {/* <EndDate /> */}
-      {/* <DailyPace /> */}
-      {/* <DaysInLevel /> */}
-      {/* <CareerPrep /> */}
-      {/* <ProgressData /> */}
+      <ProgressGraph />
+      <ProgressPoints />
+      <EndDate />
+      <DailyPace />
+      <DaysInLevel />
+      <CareerPrep />
+      <ProgressData />
     </div>
   );
 }

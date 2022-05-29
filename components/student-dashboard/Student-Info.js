@@ -1,5 +1,3 @@
-// export function StudentInfo() {
-// export default function StudentInfo() {
 export const StudentInfo = () => {
   return (
     <div
