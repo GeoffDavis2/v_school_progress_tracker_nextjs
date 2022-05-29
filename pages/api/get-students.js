@@ -28,26 +28,6 @@ export default async function handler(req, res) {
           .toISODate(),
   }));
 
-  allRecs
-    .filter((obj) =>
-      ['rec3rFROxMgDJIT2f', 'rec4GboMrITNyWDFf'].includes(obj.RecordID),
-    )
-    .forEach((obj) => {
-      if (obj['Planned End Date'])
-        console.log(
-          `End Dt for ${obj['Student Name']} is ${obj['Planned End Date']}`,
-        );
-      console.log(obj);
-    });
-
-  reMappedFields
-    .filter((obj) =>
-      ['rec3rFROxMgDJIT2f', 'rec4GboMrITNyWDFf'].includes(obj.studentId),
-    )
-    .forEach((obj) => {
-      console.log(obj);
-    });
-
   // Sort Data
   const sortedStudents = reMappedFields
     .slice()

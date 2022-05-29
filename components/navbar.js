@@ -29,6 +29,7 @@ const NavItem = ({ item }) => {
 
 export const Navbar = () => {
   const menuItems = [
+    { title: 'Student Dashboard', href: '/student-dashboard' },
     { title: 'Progress Charts', href: '/progress-charts' },
     { title: 'Progress Data', href: '/progress-data' },
     { title: 'Settings', href: '/settings' },

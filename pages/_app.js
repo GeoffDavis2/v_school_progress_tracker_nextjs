@@ -1,8 +1,8 @@
 import Layout from '../hocs/layout';
 import Authenticate from '../hocs/authenticate';
 import { ContextProvider } from '../hocs/context-provider';
-import '../styles/globals.css';
 import { SessionProvider } from 'next-auth/react';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
