@@ -24,8 +24,6 @@
 //   );
 // }
 
-
-
 import Head from 'next/head';
 import { Navbar } from '../components/navbar';
 import { SelectStudent } from '../components/select-student';
