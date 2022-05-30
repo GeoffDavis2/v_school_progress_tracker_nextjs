@@ -7,6 +7,7 @@ import { DaysInLevel } from '../components/student-dashboard/Days-In-Level';
 import { ProgressGraph } from '../components/student-dashboard/Progress-Graph';
 import { CareerPrep } from '../components/student-dashboard/Career-Prep';
 import { ProgressData } from '../components/student-dashboard/Progress-Data';
+import styles from '../components/student-dashboard/styles.module.css';
 
 export default function StudentDashboard() {
   const { studentProgress } = useTheContext();
@@ -14,7 +15,7 @@ export default function StudentDashboard() {
   if (studentProgress.length < 1) return <h1>No Data</h1>;
 
   return (
-    <div className="student_dashboard_grid_container">
+    <div className={styles.container}>
       <StudentInfo />
       <ProgressGraph />
       <ProgressPoints />

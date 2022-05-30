@@ -1,0 +1,12 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+  
+.sub_component {
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid #D8D4CF;
+    border-radius: 8px;
+}
+  

@@ -4,15 +4,3 @@ body {
   margin: 0;
   scrollbar-gutter: stable;
 }
-
-.student_dashboard_grid_container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.student_dashboard_component {
-  margin: 1rem;
-  padding: 1rem;
-  border: 1px solid #D8D4CF;
-  border-radius: 8px;
-}

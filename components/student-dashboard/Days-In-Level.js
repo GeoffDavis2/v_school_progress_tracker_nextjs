@@ -1,3 +1,5 @@
+import styles from './styles.module.css';
+
 export const DaysInLevel = () => {
-  return <div className="student_dashboard_component">Days In Level</div>;
+  return <div className={styles.sub_component}>Days In Level</div>;
 };

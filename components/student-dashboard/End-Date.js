@@ -1,3 +1,5 @@
+import styles from './styles.module.css';
+
 export const EndDate = () => {
-  return <div className="student_dashboard_component">End Date</div>;
+  return <div className={styles.sub_component}>End Date</div>;
 };
