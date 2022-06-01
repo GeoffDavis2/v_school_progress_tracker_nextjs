@@ -9,4 +9,22 @@
     border: 1px solid #D8D4CF;
     border-radius: 8px;
 }
-  
+
+.label_font {
+    font-weight: 700;
+}
+
+.big_value_font {
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.sm_unit_font {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.deviation_font {
+    font-size: 1.5rem;
+    font-weight: 700;
+}

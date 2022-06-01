@@ -8,8 +8,15 @@ export default async function handler(req, res) {
 
   const { AIRTABLE_ENDPOINT, STUDENT_RECORDS_AIR_TABLE_ID } = process.env;
   const filter = '?view=In_progress';
-  const fields =
-    '&fields=RecordID&fields=Student%20Name&fields=Course%20Start%20Date&fields=Planned%20End%20Date';
+
+  let fields = '&fields=RecordID';
+  fields += '&fields=Student%20Name';
+  fields += '&fields=Course%20Start%20Date';
+  fields += '&fields=Planned%20End%20Date';
+  fields += '&fields=Student%20Status';
+  fields += '&fields=SSM';
+  fields += '&fields=Course%20Subject';
+  fields += '&fields=Current%20Level';
 
   const url =
     AIRTABLE_ENDPOINT + STUDENT_RECORDS_AIR_TABLE_ID + filter + fields;
@@ -26,6 +33,10 @@ export default async function handler(req, res) {
           .toUTC()
           .plus({ days: 250 })
           .toISODate(),
+    status: obj['Student Status'],
+    ssm: obj['SSM'],
+    courseSubject: obj['Course Subject'],
+    currentLevel: obj['Current Level'],
   }));
 
   // Sort Data
