@@ -2,6 +2,9 @@ import { getSession } from 'next-auth/react';
 import { getAllRecs } from '../../helpers/get-all-records';
 import { DateTime } from 'luxon';
 
+const calcGoalPts = (totPts, dayNum, totalDays) =>
+  Math.round((totPts * dayNum) / totalDays);
+
 export default async function handler(req, res) {
   const session = await getSession({ req });
   if (!session) return res.status(401).json({ errMsg: 'Not Authenticated' });
@@ -57,8 +60,18 @@ export default async function handler(req, res) {
     pts: revSortedProgress.find((x) => x.dt === obj.dt)?.pts ?? null,
   }));
 
+  // Calculate Baseline Goal Points
+  const totalDays = DateTime.fromISO(theStudent.endDt).diff(
+    DateTime.fromISO(theStudent.startDt),
+    'days',
+  ).days;
+  const addGoal = mergedArr.map((obj, i) => ({
+    ...obj,
+    goal: calcGoalPts(theStudent.courseTotPts, i, totalDays),
+  }));
+
   // Add studenName to first element of array
-  const addStudenName = JSON.parse(JSON.stringify(mergedArr));
+  const addStudenName = JSON.parse(JSON.stringify(addGoal));
   if (addStudenName[0]) addStudenName[0].studentName = theStudent.studentName;
 
   return res.status(201).json(addStudenName);

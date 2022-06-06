@@ -6,7 +6,8 @@ export const Pace = () => {
   return (
     <div
       style={{
-        backgroundColor: '#D9ECE8',
+        // backgroundColor: '#D9ECE8',
+        backgroundColor: 'yellow',
         border: '1px solid #D8D4CF',
         borderRadius: '8px',
         padding: '6px 12px',
@@ -27,11 +28,11 @@ export const StudentInfo = () => {
     <div className={styles.sub_component} style={{ gridArea: '1 / 1 / 2 / 3' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ fontSize: '1.5rem', fontWeight: '700' }}>
-          {selectedStudent.studentName}
+          {selectedStudent?.studentName}
         </div>
         <Pace />
       </div>
-      <div>SSM: {selectedStudent.ssm}</div>
+      <div>SSM: {selectedStudent?.ssm}</div>
       <div
         style={{
           display: 'flex',
@@ -41,15 +42,15 @@ export const StudentInfo = () => {
       >
         <div>
           <div style={studentInfoLabel}>Program</div>
-          <div>{selectedStudent.courseSubject}</div>
+          <div>{selectedStudent?.courseSubject}</div>
         </div>
         <div>
           <div style={studentInfoLabel}>Start Date</div>
-          <div>{selectedStudent.startDt}</div>
+          <div>{selectedStudent?.startDt}</div>
         </div>
         <div>
           <div style={studentInfoLabel}>Current Level</div>
-          <div>{selectedStudent.currentLevel}</div>
+          <div>{selectedStudent?.currentLevel}</div>
         </div>
       </div>
     </div>

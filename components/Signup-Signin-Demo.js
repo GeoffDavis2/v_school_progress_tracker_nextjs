@@ -19,7 +19,7 @@ export const SignupSigninDemo = () => {
       >
         <h1>Sign Up / Sign In with Auth0</h1>
       </button>
-      <h3 style={{ color: 'red' }}>Only if your email is on our Whitelist</h3>
+      {/* <h3 style={{ color: 'red' }}>Only if your email is on our Whitelist</h3> */}
 
       {/* <button
         style={{ marginTop: '4rem' }}

@@ -3,7 +3,7 @@ import { SignupSigninDemo } from '../components/Signup-Signin-Demo';
 
 const Authenticate = ({ children }) => {
   const { data: token, status } = useSession();
-  console.log(token);
+  // console.log(token);
   // status = 'demo';
 
   if (status === 'demo') return <h1>Status is Demo</h1>;

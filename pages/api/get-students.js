@@ -27,16 +27,19 @@ export default async function handler(req, res) {
     studentId: obj.RecordID,
     studentName: obj['Student Name'],
     startDt: obj['Course Start Date'],
+    // TODO Get DEFAULT_COURSE_LENGTH from staff at V School
     endDt: obj['Planned End Date']
       ? obj['Planned End Date']
       : DateTime.fromISO(obj['Course Start Date'])
           .toUTC()
-          .plus({ days: 250 })
+          .plus({ days: process.env.DEFAULT_COURSE_LENGTH })
           .toISODate(),
     status: obj['Student Status'],
     ssm: obj['SSM'],
-    courseSubject: obj['Course Subject'],
     currentLevel: obj['Current Level'],
+    courseSubject: obj['Course Subject'],
+    // TODO Get courseTotPts from the Airtable Student Record Table
+    courseTotPts: 480,
   }));
 
   // Sort Data

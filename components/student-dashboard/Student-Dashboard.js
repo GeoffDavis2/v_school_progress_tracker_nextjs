@@ -4,9 +4,9 @@ import { ProgressPoints } from './Progress-Points';
 import { EndDate } from './End-Date';
 import { DailyPace } from './Daily-Pace';
 import { DaysInLevel } from './Days-In-Level';
-import { ProgressGraph } from './Progress-Graph';
+import { ProgressGraph } from '../Progress-Graph';
 import { CareerPrep } from './Career-Prep';
-import { ProgressData } from './Progress-Data';
+import { ProgressGrid } from '../Progress-Grid';
 import styles from './styles.module.css';
 
 export const StudentDashboard = () => {
@@ -17,13 +17,20 @@ export const StudentDashboard = () => {
   return (
     <div className={styles.container}>
       <StudentInfo />
-      <ProgressGraph />
+      <div
+        className={styles.sub_component}
+        style={{ gridArea: '1 / 3 / 3 / 5' }}
+      >
+        <ProgressGraph />
+      </div>
       <ProgressPoints />
       <EndDate />
       <DailyPace />
       <DaysInLevel />
       <CareerPrep />
-      <ProgressData />
+      <div className={styles.sub_component} style={{ gridColumn: '1 / 5' }}>
+        <ProgressGrid />
+      </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ export const DaysInLevel = () => {
   // TODO Use lodash (_.cloneDeep) instead of JSON.stringify
   let currPts = JSON.parse(JSON.stringify(studentProgress))
     .reverse()
-    .find((obj) => obj.pts).dt;
+    .find((obj) => obj.pts)?.dt;
 
   return (
     <div className={styles.sub_component}>
@@ -17,6 +17,9 @@ export const DaysInLevel = () => {
       </div>
       <div>
         <span>+ xx%</span> Percentage of Level
+      </div>
+      <div style={{ backgroundColor: 'yellow', textAlign: 'center' }}>
+        ... no way to know this ...
       </div>
     </div>
   );
