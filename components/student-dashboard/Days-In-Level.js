@@ -19,7 +19,7 @@ export const DaysInLevel = () => {
         <span>+ xx%</span> Percentage of Level
       </div>
       <div style={{ backgroundColor: 'yellow', textAlign: 'center' }}>
-        ... no way to know this ...
+        Airtable does not capture adequate data for this metric.
       </div>
     </div>
   );

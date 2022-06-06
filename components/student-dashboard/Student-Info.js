@@ -1,21 +1,33 @@
 import { useTheContext } from '../../hocs/context-provider';
+import { DateTime } from 'luxon';
 import styles from './styles.module.css';
 
 export const Pace = () => {
-  // TODO Add logic to calculate pace
+  const { studentProgress } = useTheContext();
+
+  const lastEntry = JSON.parse(JSON.stringify(studentProgress))
+    .reverse()
+    .find((obj) => obj.pts);
+  const goalForToday = studentProgress.find(
+    (obj) => obj.dt === DateTime.now().toISODate(),
+  )?.goal;
+  const delta = new Intl.NumberFormat('en-US', {
+    signDisplay: 'exceptZero',
+  }).format(lastEntry?.pts - goalForToday);
+
   return (
     <div
       style={{
-        // backgroundColor: '#D9ECE8',
-        backgroundColor: 'yellow',
-        border: '1px solid #D8D4CF',
+        backgroundColor: delta >= 0 ? '#D9ECE8' : 'pink',
+        borderStyle: 'solid',
         borderRadius: '8px',
+        borderColor: delta >= 0 ? '#008566' : 'orange',
         padding: '6px 12px',
         fontSize: '.75rem',
         fontWeight: '0700',
       }}
     >
-      ON TRACK
+      {delta >= 0 ? 'ON' : 'OFF'} TRACK
     </div>
   );
 };

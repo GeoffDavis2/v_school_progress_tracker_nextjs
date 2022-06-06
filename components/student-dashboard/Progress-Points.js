@@ -1,17 +1,19 @@
 import { useTheContext } from '../../hocs/context-provider';
+import { DateTime } from 'luxon';
 import styles from './styles.module.css';
 
 export const ProgressPoints = () => {
-  const { studentProgress } = useTheContext();
-  // TODO Find better way to clone, just want to ensure it doesn't mutate the original array
-  // TODO Use lodash (_.cloneDeep) instead of JSON.stringify
-  // TODO ... or just use map???
+  const { selectedStudent, studentProgress } = useTheContext();
+
   const lastEntry = JSON.parse(JSON.stringify(studentProgress))
     .reverse()
     .find((obj) => obj.pts);
+  const goalForToday =
+    studentProgress.find((obj) => obj.dt === DateTime.now().toISODate())
+      ?.goal || selectedStudent.courseTotPts;
   const delta = new Intl.NumberFormat('en-US', {
     signDisplay: 'exceptZero',
-  }).format(lastEntry?.pts - lastEntry?.goal);
+  }).format(lastEntry?.pts - goalForToday);
 
   return (
     <div className={styles.sub_component}>

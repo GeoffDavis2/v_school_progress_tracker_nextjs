@@ -4,13 +4,13 @@ import styles from './styles.module.css';
 
 export const DailyPace = () => {
   const { selectedStudent, studentProgress } = useTheContext();
+
   const lastEntry = JSON.parse(JSON.stringify(studentProgress))
     .reverse()
     .find((obj) => obj.pts);
   const daysLeft = Math.round(
     DateTime.fromISO(selectedStudent?.endDt).diff(DateTime.now(), 'days').days,
   );
-  console.log('reqPerDay', daysLeft);
   const reqPerDay =
     Math.round(
       ((selectedStudent?.courseTotPts - lastEntry?.pts) * 100) / daysLeft,

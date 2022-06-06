@@ -1,4 +1,5 @@
 import { useTheContext } from '../hocs/context-provider';
+import { DateTime } from 'luxon';
 
 export const ProgressGrid = () => {
   const { studentProgress } = useTheContext();
@@ -19,13 +20,16 @@ export const ProgressGrid = () => {
         <div>Goal</div>
         <div>Points</div>
       </div>
-      {studentProgress?.map((obj, i) => (
-        <div style={gridStyle} key={i}>
-          <div>{obj.dt}</div>
-          <div>{obj.goal}</div>
-          <div>{obj.pts}</div>
-        </div>
-      ))}
+      {studentProgress
+        ?.filter((obj) => obj.dt <= DateTime.now().toISODate())
+        .reverse()
+        .map((obj, i) => (
+          <div style={gridStyle} key={i}>
+            <div>{obj.dt}</div>
+            <div>{obj.goal}</div>
+            <div>{obj.pts}</div>
+          </div>
+        ))}
     </>
   );
 };

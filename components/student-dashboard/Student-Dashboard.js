@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useTheContext } from '../../hocs/context-provider';
 import { StudentInfo } from './Student-Info';
 import { ProgressPoints } from './Progress-Points';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 
 export const StudentDashboard = () => {
   const { studentProgress } = useTheContext();
+  const router = useRouter();
 
   if (studentProgress.length < 1) return <h1>No Data</h1>;
 
@@ -20,6 +22,7 @@ export const StudentDashboard = () => {
       <div
         className={styles.sub_component}
         style={{ gridArea: '1 / 3 / 3 / 5' }}
+        onClick={() => router.push('./progress-charts')}
       >
         <ProgressGraph />
       </div>
@@ -28,7 +31,11 @@ export const StudentDashboard = () => {
       <DailyPace />
       <DaysInLevel />
       <CareerPrep />
-      <div className={styles.sub_component} style={{ gridColumn: '1 / 5' }}>
+      <div
+        className={styles.sub_component}
+        style={{ gridColumn: '1 / 5' }}
+        onClick={() => router.push('./progress-data')}
+      >
         <ProgressGrid />
       </div>
     </div>
