@@ -2,9 +2,7 @@ import { useSession } from 'next-auth/react';
 import { SignupSigninDemo } from '../components/Signup-Signin-Demo';
 
 const Authenticate = ({ children }) => {
-  const { data: token, status } = useSession();
-  // console.log(token);
-  // status = 'demo';
+  const { data, status } = useSession();
 
   if (status === 'demo') return <h1>Status is Demo</h1>;
   if (status === 'unauthenticated') return <SignupSigninDemo />;
