@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { signOut } from 'next-auth/react';
+// import { signOut } from 'next-auth/react';
 
 const textStyle = {
   padding: '5px 25px',
@@ -28,7 +28,9 @@ const NavItem = ({ item }) => {
 };
 
 export const Navbar = () => {
+  const router = useRouter();
   const menuItems = [
+    { title: 'Home Page', href: '/' },
     { title: 'Student Dashboard', href: '/student-dashboard' },
     { title: 'Progress Charts', href: '/progress-charts' },
     { title: 'Progress Data', href: '/progress-data' },
@@ -43,7 +45,8 @@ export const Navbar = () => {
         ))}
         <button
           style={{ marginLeft: '25px' }}
-          onClick={() => signOut({ callbackUrl: '/' })}
+          // onClick={() => signOut({ callbackUrl: '/' })
+          onClick={() => router.push('/api/auth/logout')}
         >
           Sign Out
         </button>

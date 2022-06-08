@@ -1,10 +1,49 @@
-import { getSession } from 'next-auth/react';
+import { getSession } from '@auth0/nextjs-auth0';
 import { getAllRecs } from '../../helpers/get-all-records';
 import { DateTime } from 'luxon';
 
+const sampleStudents = [
+  {
+    'Student Name': 'Ocean Ferrell',
+    'Course Subject': 'FSJS',
+    'Course Start Date': '2022-01-01',
+    'Current Level': 4,
+    'Student Status': 'In progress',
+    SSM: 'Jonas Wilder',
+    RecordID: 'random-student-id-1',
+  },
+  {
+    'Student Name': 'Lewis Traynor',
+    'Course Subject': 'FSJS',
+    'Course Start Date': '2022-02-01',
+    'Current Level': 3,
+    'Student Status': 'In progress',
+    SSM: 'Makayla Hartman',
+    RecordID: 'random-student-id-2',
+  },
+  {
+    'Student Name': 'Haydon Haley',
+    'Course Subject': 'XD',
+    'Course Start Date': '2022-03-01',
+    'Current Level': 2,
+    'Student Status': 'In progress',
+    SSM: 'Jonas Wilder',
+    RecordID: 'random-student-id-3',
+  },
+  {
+    'Student Name': 'Evalyn Gibbons',
+    'Course Subject': 'FSJS',
+    'Course Start Date': '2022-04-01',
+    'Current Level': 1,
+    'Student Status': 'In progress',
+    SSM: 'Makayla Hartman',
+    RecordID: 'random-student-id-4',
+  },
+];
+
 export default async function handler(req, res) {
-  const session = await getSession({ req });
-  if (!session) return res.status(401).json({ errMsg: 'Not Authenticated' });
+  // const session = getSession(req, res);
+  // if (!session) return res.status(201).json([{test: 'test'}]);
 
   const { AIRTABLE_ENDPOINT, STUDENT_RECORDS_AIR_TABLE_ID } = process.env;
   const filter = '?view=In_progress';
@@ -20,7 +59,8 @@ export default async function handler(req, res) {
 
   const url =
     AIRTABLE_ENDPOINT + STUDENT_RECORDS_AIR_TABLE_ID + filter + fields;
-  const allRecs = await getAllRecs(url, 5);
+  // const allRecs = await getAllRecs(url, 5);
+  const allRecs = JSON.parse(JSON.stringify(sampleStudents));
 
   // Transform Data
   const reMappedFields = allRecs.map((obj) => ({
@@ -51,9 +91,11 @@ export default async function handler(req, res) {
 
   // Add "--- Select Student ---"" as first element of array
   const withSelectStudent = [
-    { studentId: '', studentName: '--- Select Student ---' },
+    { studentId: 'placeholder', studentName: '--- Select Student ---' },
     ...sortedStudents,
   ];
+
+  console.log('withSelectStudent', withSelectStudent);
 
   return res.status(201).json(withSelectStudent);
 }

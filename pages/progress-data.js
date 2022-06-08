@@ -1,23 +1,23 @@
-import { getSession } from 'next-auth/react';
+// import { getSession } from 'next-auth/react';
 import { ProgressGrid } from '../components/Progress-Grid';
 
 export default function ProgressData() {
   return <ProgressGrid />;
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
+// export async function getServerSideProps(context) {
+//   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: '/',
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: { session },
-  };
-}
+//   return {
+//     props: { session },
+//   };
+// }

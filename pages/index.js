@@ -1,3 +1,5 @@
+import { SignupSigninDemo } from '../components/Signup-Signin-Demo';
+
 export default function Home() {
-  return <h1>Home Page</h1>;
+  return <SignupSigninDemo />;
 }

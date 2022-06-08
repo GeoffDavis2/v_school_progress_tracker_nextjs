@@ -1,21 +1,16 @@
 import Layout from '../hocs/layout';
-import Authenticate from '../hocs/authenticate';
+import NextJS_Auth0 from '../hocs/Nextjs-Auth0';
 import { ContextProvider } from '../hocs/context-provider';
-import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {
   return (
-    <SessionProvider session={pageProps.session}>
+    <NextJS_Auth0>
       <ContextProvider>
-        <Authenticate>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </Authenticate>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ContextProvider>
-    </SessionProvider>
+    </NextJS_Auth0>
   );
 }
-
-export default MyApp;

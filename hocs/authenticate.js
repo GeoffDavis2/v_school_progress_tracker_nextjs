@@ -1,13 +1,13 @@
-import { useSession } from 'next-auth/react';
+import { useUser } from '@auth0/nextjs-auth0';
 import { SignupSigninDemo } from '../components/Signup-Signin-Demo';
 
 const Authenticate = ({ children }) => {
-  const { data, status } = useSession();
-
-  if (status === 'demo') return <h1>Status is Demo</h1>;
-  if (status === 'unauthenticated') return <SignupSigninDemo />;
-  if (status === 'loading') return <h1>Logging In</h1>;
-  if (status === 'authenticated') return <>{children}</>;
+  const { user, error, isLoading } = useUser();
+  console.log('user', user);
+  if (error) return <h1>{error.message}</h1>;
+  if (isLoading) return <h1>Loading</h1>;
+  if (!user) return <SignupSigninDemo />;
+  if (user) return <>{children}</>;
   return <h1>Unknown Error</h1>;
 };
 

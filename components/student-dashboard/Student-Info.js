@@ -21,7 +21,7 @@ export const Pace = () => {
         backgroundColor: delta >= 0 ? '#D9ECE8' : 'pink',
         borderStyle: 'solid',
         borderRadius: '8px',
-        borderColor: delta >= 0 ? '#008566' : 'orange',
+        borderColor: delta >= 0 ? '#008566' : 'red',
         padding: '6px 12px',
         fontSize: '.75rem',
         fontWeight: '0700',

@@ -16,8 +16,15 @@ const Layout = ({ children }) => {
       <main>
         <SelectStudent />
         {children}
-        <footer>
-          <h1>Footer Info Here...</h1>
+        <footer
+          style={{
+            backgroundColor: 'black',
+            padding: '50px',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <h1 style={{ color: 'white' }}>Footer Info for V School Here...</h1>
         </footer>
       </main>
     </>

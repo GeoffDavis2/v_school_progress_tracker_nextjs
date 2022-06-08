@@ -11,16 +11,24 @@ export const SelectStudent = () => {
 
   // Load selected student if possible
   useEffect(() => {
-    const prevStudentId = localStorage.getItem('selectedStudentId') ?? null;
-    if (prevStudentId && allStudents.length > 0)
+    if (localStorage.getItem('selectedStudentId') && allStudents.length > 0) {
       setSelectedStudent(
-        allStudents.find((obj) => obj.studentId === prevStudentId),
+        allStudents.find(
+          (obj) => obj.studentId === localStorage.getItem('selectedStudentId'),
+        ),
       );
+    } else {
+      setSelectedStudent({
+        studentId: 'placeholder',
+        studentName: '--- Select Student ---',
+      });
+    }
   }, [allStudents, setSelectedStudent]);
 
   // If new selected student, load in localstorage and load progress data for the student
   useEffect(() => {
-    if (selectedStudent.studentId)
+    console.log('selectedStudent', selectedStudent);
+    if (selectedStudent?.studentId)
       localStorage.setItem('selectedStudentId', selectedStudent.studentId);
 
     (async () => {
@@ -37,6 +45,11 @@ export const SelectStudent = () => {
   if (allStudents.length === 0)
     return <h1 style={{ marginTop: '50px' }}>Loading Students</h1>;
 
+  // TODO if Demo then show sample list of students
+
+  // TODO  If not Staff then just show logged in students name
+
+  // TODO If Staff then show email address for who is logged in and show dropdown box
   return (
     <div style={{ marginTop: '50px' }}>
       <label>

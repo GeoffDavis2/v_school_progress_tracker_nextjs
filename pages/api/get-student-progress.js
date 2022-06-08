@@ -1,4 +1,4 @@
-import { getSession } from 'next-auth/react';
+// import { getSession } from 'next-auth/react';
 import { getAllRecs } from '../../helpers/get-all-records';
 import { DateTime } from 'luxon';
 
@@ -6,8 +6,8 @@ const calcGoalPts = (totPts, dayNum, totalDays) =>
   Math.round((totPts * dayNum) / totalDays);
 
 export default async function handler(req, res) {
-  const session = await getSession({ req });
-  if (!session) return res.status(401).json({ errMsg: 'Not Authenticated' });
+  // const session = await getSession({ req });
+  // if (!session) return res.status(401).json({ errMsg: 'Not Authenticated' });
 
   if (!req || !req.body)
     return res
