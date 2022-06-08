@@ -95,7 +95,5 @@ export default async function handler(req, res) {
     ...sortedStudents,
   ];
 
-  console.log('withSelectStudent', withSelectStudent);
-
   return res.status(201).json(withSelectStudent);
 }
