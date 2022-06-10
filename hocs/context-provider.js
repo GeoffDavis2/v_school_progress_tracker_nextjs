@@ -12,7 +12,6 @@ export const ContextProvider = ({ children }) => {
   const [selectedStudent, setSelectedStudent] = useState({});
   const [studentProgress, setStudentProgress] = useState([]);
 
-  // await fetch('/api/get-students', { headers: { usertype: 'Staff' } })
   useEffect(() => {
     (async () =>
       setAllStudents(await (await fetch('/api/get-students')).json()))();

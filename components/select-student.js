@@ -28,31 +28,32 @@ export const SelectStudent = () => {
 
   // If new selected student, load in localstorage and load progress data for the student
   useEffect(() => {
-    if (selectedStudent?.studentId)
-      localStorage.setItem('selectedStudentId', selectedStudent.studentId);
+    if (selectedStudent?.studentId) {
+      localStorage.setItem('selectedStudentId', selectedStudent?.studentId);
 
-    (async () => {
-      const res = await (
-        await fetch('/api/get-student-progress', {
-          method: 'POST',
-          body: JSON.stringify(selectedStudent),
-        })
-      ).json();
-      setStudentProgress(res);
-    })();
+      (async () => {
+        const res = await (
+          await fetch('/api/get-student-progress', {
+            method: 'POST',
+            body: JSON.stringify(selectedStudent),
+          })
+        ).json();
+        setStudentProgress(res);
+      })();
+    }
   }, [selectedStudent, setStudentProgress]);
 
   if (allStudents.length === 0)
     return <h1 style={{ marginTop: '50px' }}>Loading Students</h1>;
 
   return (
-    <div style={{ marginTop: '50px' }}>
+    <div style={{ marginTop: '25px' }}>
       <label>
         <h2 style={{ display: 'inline' }}>Select a Student: </h2>
       </label>
       <select
         value={allStudents?.findIndex(
-          (obj) => obj.studentId === selectedStudent.studentId,
+          (obj) => obj.studentId === selectedStudent?.studentId,
         )}
         onChange={(e) => setSelectedStudent(allStudents[e.target.value])}
       >

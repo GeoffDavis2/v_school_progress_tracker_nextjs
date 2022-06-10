@@ -1,7 +1,3 @@
-// TODO Navbar: if not signed in add sign in button, if signed have signout button
-// TODO remove Select a Student from the Home page
-// TODO Add explanation of webstite top homepage (including click "demo or sign in")
-
 const { DateTime } = require('luxon');
 const faker = require('faker');
 
@@ -33,7 +29,6 @@ const genSampleData = (stDt, totDays, totPts) => {
 };
 
 console.log(genSampleData('2022-01-01', 250, 480));
-
 
 const createDatePoints = (stDt, totDays, totPts) => {
   const daysSoFar = -Math.floor(DateTime.fromISO(stDt).diffNow('days').days);

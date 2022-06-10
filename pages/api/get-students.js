@@ -47,8 +47,11 @@ export default async function handler(req, res) {
 
   const url =
     AIRTABLE_ENDPOINT + STUDENT_RECORDS_AIR_TABLE_ID + filter + fields;
-  // TODO Add test to make sure email is verified also
-  const allRecs = session ? await getAllRecs(url, 5) : genSampleStudents(5);
+
+  const allRecs =
+    session && session?.user?.email_verified
+      ? await getAllRecs(url, 5)
+      : genSampleStudents(5);
 
   // Transform Data
   const reMappedFields = allRecs.map((obj) => ({

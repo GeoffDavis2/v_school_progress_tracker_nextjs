@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 
 export const DaysInLevel = () => {
   const { studentProgress } = useTheContext();
-  // TODO Use lodash (_.cloneDeep) instead of JSON.stringify
+  // TODO Use lodash (_.cloneDeep) instead of JSON.stringify?
   let currPts = JSON.parse(JSON.stringify(studentProgress))
     .reverse()
     .find((obj) => obj.pts)?.dt;

@@ -1,24 +1,44 @@
-.demo_banner {
-    color: red;
-    background-color: red;
-    color: white;
-    text-align: center;
-    animation: slide-left 20s forwards linear infinite;
-  }
+/* TODO Clean this up and rename the classes */
+/* TODO Add logic to pause scroll if mouse hovers on it */
 
-  .marquee {
-    /* position: absolute; */
-    top: 0;
-    left: 0;
-    /* width: var(--marquee-width); */
-    overflow: hidden;
-    /* pointer-events: none; */
-    /* mix-blend-mode: color-burn; */
-  }
 
-@keyframes slide-left {
-    /* 0%{left: 0;}
-    100%{left: 200;} */
-    0%{transform: translateX(0);}
-    100%{transform: translateX(-100%);}
+.scroll {
+  /* position: relative; */
+  /* width: 100vw; */
+  /* height: 15%; */
+  /* min-height: 150px; */
+  background-color: red;
+  margin-top: 25px;
+  /* overflow: hidden; */
+  /* z-index: 1; */
+  /* margin: 0; */
+  /* padding: 0; */
+}
+
+.m_scroll {
+  /* overflow_hidden; */
+  /* height: 100%; */
+  white-space: nowrap;
+  animation: scrollText 10s infinite linear;
+  /* margin: 0; */
+  /* font-size: 0; */
+  display: inline-block;
+}
+
+.the_span {
+  font-size: 50px;
+  /* display: inline-block; */
+  /* min-width: 100vw; */
+  /* margin: 0; */
+  /* padding: 0; */
+  color: white;
+}
+
+@keyframes scrollText {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

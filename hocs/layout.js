@@ -1,9 +1,11 @@
 import Head from 'next/head';
-import { Navbar } from '../components/navbar';
+import { useRouter } from 'next/router';
+import { Navbar } from '../components/navbar/Navbar';
 import { SelectStudent } from '../components/select-student';
 import { DemoBanner } from '../components/demo-banner/Demo-Banner';
 
 const Layout = ({ children }) => {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -15,8 +17,12 @@ const Layout = ({ children }) => {
       </header>
 
       <main>
-        <SelectStudent />
-        <DemoBanner />
+        {router.pathname !== '/' && (
+          <>
+            <DemoBanner />
+            <SelectStudent />
+          </>
+        )}
         {children}
         <footer
           style={{

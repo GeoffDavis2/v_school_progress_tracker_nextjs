@@ -49,10 +49,11 @@ export default async function handler(req, res) {
     '&fields=Date%20Reported&fields=Level%20at%20submission%20&fields=Current%20Story%20Point';
   const url =
     AIRTABLE_ENDPOINT + STUDENT_TRACKING_AIR_TABLE_ID + filter + fields;
-  // TODO Add test to make sure email is verified also
-  const allRecs = session
-    ? await getAllRecs(url, 5)
-    : genSampleData(theStudent.startDt, 250, 480);
+
+  const allRecs =
+    session && session?.user?.email_verified
+      ? await getAllRecs(url, 5)
+      : genSampleData(theStudent.startDt, 250, 480);
 
   // Re-Map field names
   const reMappedFields = allRecs.map((obj) => ({
