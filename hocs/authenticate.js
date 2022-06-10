@@ -3,7 +3,6 @@ import { SignupSigninDemo } from '../components/Signup-Signin-Demo';
 
 const Authenticate = ({ children }) => {
   const { user, error, isLoading } = useUser();
-  console.log('user', user);
   if (error) return <h1>{error.message}</h1>;
   if (isLoading) return <h1>Loading</h1>;
   if (!user) return <SignupSigninDemo />;

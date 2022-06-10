@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { Navbar } from '../components/navbar';
 import { SelectStudent } from '../components/select-student';
+import { DemoBanner } from '../components/Demo-Banner';
 
 const Layout = ({ children }) => {
   return (
@@ -15,6 +16,7 @@ const Layout = ({ children }) => {
 
       <main>
         <SelectStudent />
+        <DemoBanner />
         {children}
         <footer
           style={{

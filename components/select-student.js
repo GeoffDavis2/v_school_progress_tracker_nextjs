@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useTheContext } from '../hocs/context-provider';
 
+// TODO Make this and all other compenent filenames start with a capital letter
 export const SelectStudent = () => {
   const {
     allStudents,
@@ -27,7 +28,6 @@ export const SelectStudent = () => {
 
   // If new selected student, load in localstorage and load progress data for the student
   useEffect(() => {
-    console.log('selectedStudent', selectedStudent);
     if (selectedStudent?.studentId)
       localStorage.setItem('selectedStudentId', selectedStudent.studentId);
 
@@ -45,11 +45,6 @@ export const SelectStudent = () => {
   if (allStudents.length === 0)
     return <h1 style={{ marginTop: '50px' }}>Loading Students</h1>;
 
-  // TODO if Demo then show sample list of students
-
-  // TODO  If not Staff then just show logged in students name
-
-  // TODO If Staff then show email address for who is logged in and show dropdown box
   return (
     <div style={{ marginTop: '50px' }}>
       <label>

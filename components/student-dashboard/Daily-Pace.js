@@ -28,7 +28,7 @@ export const DailyPace = () => {
     <div className={styles.sub_component}>
       <div className={styles.label_font}>Required Daily Pace</div>
       <div>
-        <span className={styles.big_value_font}>{reqPerDay}</span>
+        <span className={styles.big_value_font}>{reqPerDay.toString()}</span>
         <span className={styles.sm_unit_font}> pts</span>
       </div>
       <div>

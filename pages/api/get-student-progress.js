@@ -1,41 +1,41 @@
-// import { getSession } from 'next-auth/react';
+import { getSession } from '@auth0/nextjs-auth0';
 import { getAllRecs } from '../../helpers/get-all-records';
+import faker from 'faker';
 import { DateTime } from 'luxon';
 
-const createDatePoints = (stDt, totDays, totPts) => {
+// TODO Move this to a helper file
+const genSampleData = (stDt, totDays, totPts) => {
   const daysSoFar = -Math.floor(DateTime.fromISO(stDt).diffNow('days').days);
   const goalPtsPerDay = totPts / totDays;
   const studentMaxPtsPerDay = Math.random() * goalPtsPerDay * 1.5;
   const studentMinPtsPerDay = Math.random() * goalPtsPerDay * 0.5;
   const avgDaysPerLesson = 5;
 
-  const datePoints = [];
+  const theArray = [];
   let currPts = 0;
-  for (
-    let day = 0;
-    day < daysSoFar;
-    day += Math.round(Math.random() * avgDaysPerLesson) + 1
-  ) {
-    const pacePerDay = Math.round(
+  let day = 1;
+  while (day < daysSoFar && currPts < totPts) {
+    day += faker.datatype.number({ min: 1, max: avgDaysPerLesson });
+    const ptsThisPeriod =
       Math.random() * (studentMaxPtsPerDay + studentMinPtsPerDay) +
-        studentMinPtsPerDay,
+      studentMinPtsPerDay;
+    currPts = Math.min(
+      totPts,
+      currPts + Math.round(ptsThisPeriod * avgDaysPerLesson),
     );
-    const ptsCompleted = pacePerDay * avgDaysPerLesson;
-    currPts += ptsCompleted;
-    datePoints.push({
+    theArray.push({
       'Date Reported': DateTime.fromISO(stDt).plus({ days: day }).toISODate(),
       'Current Story Point': currPts,
     });
   }
-  return datePoints;
+  return theArray;
 };
 
 const calcGoalPts = (totPts, dayNum, totalDays) =>
   Math.round((totPts * dayNum) / totalDays);
 
 export default async function handler(req, res) {
-  // const session = await getSession({ req });
-  // if (!session) return res.status(401).json({ errMsg: 'Not Authenticated' });
+  const session = getSession(req, res);
 
   if (!req || !req.body)
     return res
@@ -49,10 +49,10 @@ export default async function handler(req, res) {
     '&fields=Date%20Reported&fields=Level%20at%20submission%20&fields=Current%20Story%20Point';
   const url =
     AIRTABLE_ENDPOINT + STUDENT_TRACKING_AIR_TABLE_ID + filter + fields;
-  // const allRecs = await getAllRecs(url, 5);
-  const allRecs = createDatePoints(theStudent.startDt, 250, 480);
-
-  console.table(allRecs);
+  // TODO Add test to make sure email is verified also
+  const allRecs = session
+    ? await getAllRecs(url, 5)
+    : genSampleData(theStudent.startDt, 250, 480);
 
   // Re-Map field names
   const reMappedFields = allRecs.map((obj) => ({
