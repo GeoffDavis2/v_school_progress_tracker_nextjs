@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Navbar } from '../components/navbar';
 import { SelectStudent } from '../components/select-student';
-import { DemoBanner } from '../components/Demo-Banner';
+import { DemoBanner } from '../components/demo-banner/Demo-Banner';
 
 const Layout = ({ children }) => {
   return (
